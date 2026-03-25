@@ -1,0 +1,172 @@
+/* 1. Configurações Gerais */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: rgb(246, 249, 252);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* 2. O Card de Cadastro */
+.profile-container {
+  background-color: #ffffff;
+  width: 90%;
+  max-width: 400px; /* Largura ideal para formulários */
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  color: #333;
+  text-align: center;
+  margin-bottom: 25px;
+  font-weight: 600;
+}
+
+/* 3. Inputs (Seguindo o seu padrão arredondado) */
+.form-container {
+  margin-bottom: 15px;
+}
+
+.form-container input {
+  width: 100%;
+  padding: 12px 20px;
+  border: 1px solid #ddd;
+  border-radius: 25px; /* Deixa o input bem arredondado */
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.form-container input:focus {
+  border-color: #74ebd5; /* Cor de destaque ao clicar */
+}
+
+/* 4. Botão de Ação */
+.btn-save {
+  width: 100%;
+  padding: 12px;
+  background-color: #20b2aa; /* O turquesa que você usou nos botões */
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.btn-save:hover {
+  background-color: #1a948e;
+}
+
+/* 5. Link de Rodapé */
+.footer-link {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+  color: #666;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.footer-link:hover {
+  text-decoration: underline;
+}
+
+/* 6. Alerts */
+.alert {
+  padding: 12px 15px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  text-align: left;
+  font-weight: 500;
+}
+
+.alert-erro {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+.alert-sucesso {
+  background-color: #d1e7dd;
+  color: #0f5132;
+  border: 1px solid #badbcc;
+}
+
+/* 7. Validação de Formulário */
+.error-text {
+  font-size: 12px;
+  color: #dc3545;
+  margin-top: 5px;
+  display: block;
+}
+
+/* 8. Links */
+.login-link {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.login-link a {
+  color: #20b2aa;
+  text-decoration: none;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
+}
+
+.signup-link {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.signup-link a {
+  color: #20b2aa;
+  text-decoration: none;
+}
+
+.signup-link a:hover {
+  text-decoration: underline;
+}
+
+/* 9. Credenciais de Teste */
+.credentials-hint {
+  background-color: #e7f3ff;
+  color: #004085;
+  padding: 12px 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 13px;
+  border: 1px solid #b3d9ff;
+  line-height: 1.6;
+}
+
+.credentials-hint code {
+  background-color: #fff;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+/* 10. Títulos */
+.form-title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-title-login {
+  text-align: center;
+  margin-bottom: 25px;
+}

@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='cadastro.css') }}"
+    />
+    <title>Login | Sistema de Atendimento</title>
+  </head>
+  <body>
+    <main class="profile-container">
+      <section class="branco">
+        <h2 class="form-title-login">Acessar Conta</h2>
+
+        {% with messages = get_flashed_messages(with_categories=true) %} {% if
+        messages %} {% for category, message in messages %} {% if category ==
+        'erro' %}
+        <div class="alert alert-erro">{{ message }}</div>
+        {% elif category == 'sucesso' %}
+        <div class="alert alert-sucesso">{{ message }}</div>
+        {% endif %} {% endfor %} {% endif %} {% endwith %}
+
+        <div class="credentials-hint">
+          <strong>Credenciais de Teste:</strong><br />
+          CPF: <code>12345678910</code> | Senha: <code>12345</code>
+        </div>
+
+        <form action="/login_prosseguir" method="POST">
+          <div class="form-container">
+            <input
+              type="text"
+              name="cpf"
+              placeholder="Seu CPF"
+              maxlength="11"
+              required
+              autofocus
+            />
+          </div>
+
+          <div class="form-container">
+            <input
+              type="password"
+              name="senha"
+              placeholder="Sua Senha"
+              required
+            />
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn-save">Entrar</button>
+          </div>
+
+          <p class="signup-link">
+            Ainda não tem conta? <a href="/cadastrar">Cadastre-se aqui</a>
+          </p>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>

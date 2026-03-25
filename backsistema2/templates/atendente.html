@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='mainpage.css') }}"
+    />
+    <title>Painel do Atendente | Sistema de Atendimento</title>
+  </head>
+  <body>
+    <header class="navbar">
+      <div class="logo">
+        <h1>Painel do Atendente</h1>
+      </div>
+      <nav class="user-menu">
+        <span class="welcome-text">Modo: Gerenciamento de Fila</span>
+        <a href="/logout" class="btn-logout">Sair</a>
+      </nav>
+    </header>
+
+    <main class="content-container">
+      {% with messages = get_flashed_messages(with_categories=true) %} {% if
+      messages %} {% for category, message in messages %} {% if category ==
+      'sucesso' %}
+      <div class="alert alert-sucesso">{{ message }}</div>
+      {% elif category == 'erro' %}
+      <div class="alert alert-erro">{{ message }}</div>
+      {% endif %} {% endfor %} {% endif %} {% endwith %}
+
+      <div class="table-container">
+        <h2>Fila de Pacientes</h2>
+
+        {% if fila %}
+        <p class="table-fila-info">
+          Total de pacientes na fila: <strong>{{ fila|length }}</strong>
+        </p>
+
+        <table>
+          <thead>
+            <tr>
+              <th class="th-numero">#</th>
+              <th>Nome</th>
+              <th>CPF</th>
+              <th class="th-status">Status</th>
+              <th class="th-acoes">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for paciente in fila %}
+            <tr>
+              <td><span class="posicao">{{ loop.index }}</span></td>
+              <td>{{ paciente.nome }}</td>
+              <td>{{ paciente.cpf }}</td>
+              <td>
+                {% if paciente.status == 'Aguardando atendimento' %}
+                <span class="status-badge status-aguardando">Aguardando</span>
+                {% elif paciente.status == 'Em atendimento' %}
+                <span class="status-badge status-em-atendimento"
+                  >Em atendimento</span
+                >
+                {% elif paciente.status == 'Atendido' %}
+                <span class="status-badge status-atendido">Atendido</span>
+                {% endif %}
+              </td>
+              <td>
+                {% if paciente.status == 'Aguardando atendimento' %}
+                <a
+                  href="/mudar_status/{{ paciente.id }}/Em atendimento"
+                  class="btn-action btn-atender"
+                  >Atender</a
+                >
+                {% endif %} {% if paciente.status == 'Em atendimento' %}
+                <a
+                  href="/mudar_status/{{ paciente.id }}/Atendido"
+                  class="btn-action btn-pronto"
+                  >Pronto</a
+                >
+                {% endif %}
+
+                <a
+                  href="/mudar_status/{{ paciente.id }}/Fora da fila"
+                  class="btn-action btn-remover"
+                  >Remover</a
+                >
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+        {% else %}
+        <div class="alert alert-info">
+          <p>Nenhum paciente na fila no momento.</p>
+        </div>
+        {% endif %}
+      </div>
+
+      <div class="back-link">
+        <a href="/">Voltar para Início</a>
+      </div>
+    </main>
+  </body>
+</html>

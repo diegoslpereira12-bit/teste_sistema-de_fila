@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='cadastro.css') }}"
+    />
+    <title>Cadastro | Sistema de Atendimento</title>
+  </head>
+  <body>
+    <main class="profile-container">
+      <section class="branco">
+        <h2 class="form-title">Criar Conta</h2>
+
+        {% with messages = get_flashed_messages(with_categories=true) %} {% if
+        messages %} {% for category, message in messages %} {% if category ==
+        'erro' %}
+        <div class="alert alert-erro">{{ message }}</div>
+        {% elif category == 'sucesso' %}
+        <div class="alert alert-sucesso">{{ message }}</div>
+        {% endif %} {% endfor %} {% endif %} {% endwith %}
+
+        <form action="/salvar_cadastro" method="POST">
+          <div class="form-container">
+            <input
+              type="text"
+              name="nome"
+              placeholder="Nome Completo"
+              required
+              maxlength="100"
+            />
+            <span class="error-text">Digite seu nome completo</span>
+          </div>
+
+          <div class="form-container">
+            <input
+              type="text"
+              name="cpf"
+              placeholder="CPF (apenas números)"
+              maxlength="11"
+              required
+              pattern="\d{11}"
+            />
+            <span class="error-text">CPF com exatamente 11 dígitos</span>
+          </div>
+
+          <div class="form-container">
+            <input type="email" name="email" placeholder="E-mail" required />
+            <span class="error-text">Digite um e-mail válido</span>
+          </div>
+
+          <div class="form-container">
+            <input
+              type="password"
+              name="senha"
+              placeholder="Crie uma senha (mín. 4 caracteres)"
+              required
+              minlength="4"
+            />
+            <span class="error-text">Mínimo de 4 caracteres</span>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn-save">Finalizar Cadastro</button>
+          </div>
+
+          <p class="login-link">
+            Já tem conta? <a href="/login">Faça Login</a>
+          </p>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>

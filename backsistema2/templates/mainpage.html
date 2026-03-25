@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='mainpage.css') }}"
+    />
+    <title>Sistema de Atendimento | Início</title>
+  </head>
+  <body>
+    <header class="navbar">
+      <div class="logo">
+        <h1>Sistema de Atendimento</h1>
+      </div>
+      <nav class="user-menu">
+        {% if usuario_logado %}
+
+        <span class="welcome-text">Olá, {{ usuario_logado.nome }}</span>
+
+        {% if e_admin %}
+        <a href="/atendente" class="btn-registro btn-admin">Painel Atendente</a>
+        {% endif %}
+
+        <a href="/logout" class="btn-logout">Sair</a>
+
+        {% else %}
+        <a href="/login">Login</a>
+        <a href="/cadastrar" class="btn-registro">Registrar</a>
+        {% endif %}
+      </nav>
+    </header>
+
+    <main class="content-container">
+      {% with messages = get_flashed_messages(with_categories=true) %} {% if
+      messages %} {% for category, message in messages %} {% if category ==
+      'sucesso' %}
+      <div class="alert alert-sucesso">{{ message }}</div>
+      {% elif category == 'erro' %}
+      <div class="alert alert-erro">{{ message }}</div>
+      {% elif category == 'alerta' %}
+      <div class="alert alert-alerta">{{ message }}</div>
+      {% endif %} {% endfor %} {% endif %} {% endwith %}
+
+      <div class="status-card">
+        <h3>Status Geral do Sistema</h3>
+        <p>Pessoas aguardando: <strong>{{ fila_count }}</strong></p>
+        <p class="status-update-text">Última atualização: agora</p>
+      </div>
+      <br />
+      <br />
+      <section class="hero-section">
+        <h2>Bem-vindo ao Atendimento Digital</h2>
+        <p>Gerencie sua posição na fila com facilidade.</p>
+
+        {% if usuario_logado %}
+        <div class="fila-info">
+          <h4>Informações da Fila</h4>
+          <p>Seu Status: <strong>{{ usuario_logado.status }}</strong></p>
+          <p>
+            Pessoas aguardando atendimento: <strong>{{ fila_count }}</strong>
+          </p>
+        </div>
+
+        {% if usuario_logado.status == 'Fora da fila' %}
+        <form action="/entrar-na-fila" method="POST" class="form-action">
+          <button type="submit" class="btn-entrar-fila">Entrar na Fila</button>
+        </form>
+        {% else %}
+        <p class="status-success">Você está na fila! Aguarde sua vez.</p>
+        <form
+          action="/sair-da-fila"
+          method="POST"
+          class="form-action-secondary"
+        >
+          <button type="submit" class="btn-entrar-fila btn-danger">
+            Sair da Fila
+          </button>
+        </form>
+        {% endif %} {% else %}
+        <div class="alert-info">
+          <p>Você precisa estar logado para usar o sistema.</p>
+        </div>
+        <div class="button-group">
+          <a href="/login" class="btn-entrar-fila btn-primary">Fazer Login</a>
+          <a href="/cadastrar" class="btn-entrar-fila btn-primary btn-success"
+            >Cadastrar-se</a
+          >
+        </div>
+        {% endif %}
+      </section>
+    </main>
+  </body>
+</html>

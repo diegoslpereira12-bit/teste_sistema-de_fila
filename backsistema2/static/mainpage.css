@@ -1,0 +1,368 @@
+/* 1. Reset e Fundo */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body {
+  background-color: rgb(246, 249, 252);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 2. Navbar Profissional */
+.navbar {
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 15px 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.logo h1 {
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.user-menu {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.welcome-text {
+  color: #555;
+  font-size: 14px;
+}
+
+/* 3. Botões da Navbar */
+.btn-perfil,
+.btn-login,
+.btn-registro {
+  text-decoration: none;
+  padding: 8px 18px;
+  border-radius: 20px;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.btn-login {
+  color: #555;
+}
+.btn-registro {
+  background-color: #20b2aa;
+  color: white;
+}
+
+.btn-logout {
+  color: #ff4d4d;
+  text-decoration: none;
+  font-size: 13px;
+}
+
+/* 4. Conteúdo Central (Hero) */
+.content-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.hero-section {
+  background: white;
+  padding: 40px;
+  border-radius: 25px;
+  text-align: center;
+  max-width: 600px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.hero-section h2 {
+  margin-bottom: 15px;
+  color: #2c3e50;
+}
+
+.hero-section p {
+  color: #7f8c8d;
+  margin-bottom: 30px;
+}
+
+/* 5. Botão "Entrar na Fila" */
+.btn-entrar-fila {
+  background-color: #20b2aa;
+  color: white;
+  border: none;
+  padding: 15px 40px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 30px;
+  cursor: pointer;
+  transition:
+    transform 0.2s,
+    background 0.3s;
+}
+
+.btn-entrar-fila:hover {
+  background-color: #1a948e;
+  transform: scale(1.05); /* Efeito de zoom suave */
+}
+
+/* 6. Card de Status */
+.status-card {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #666;
+}
+
+/* 7. Alerts */
+.alert {
+  padding: 15px 20px;
+  margin: 20px auto;
+  max-width: 600px;
+  border-radius: 8px;
+  text-align: left;
+  font-weight: 500;
+}
+
+.alert-sucesso {
+  background-color: #d1e7dd;
+  color: #0f5132;
+  border: 1px solid #badbcc;
+}
+
+.alert-erro {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+.alert-alerta {
+  background-color: #fff3cd;
+  color: #664d03;
+  border: 1px solid #ffecb5;
+}
+
+.alert-info {
+  background-color: #e7f3ff;
+  color: #004085;
+  padding: 15px;
+  border-radius: 8px;
+  margin: 20px auto;
+  max-width: 600px;
+  border: 1px solid #b3d9ff;
+}
+
+/* 8. Informações da Fila */
+.fila-info {
+  background-color: rgba(32, 178, 170, 0.1);
+  border-left: 4px solid #20b2aa;
+  padding: 15px;
+  border-radius: 8px;
+  margin: 20px 0;
+}
+
+.fila-info h4 {
+  margin: 0 0 10px 0;
+  color: #20b2aa;
+  font-size: 16px;
+}
+
+/* 9. Status e Buttons */
+.status-success {
+  color: #28a745;
+  font-weight: bold;
+  font-size: 16px;
+  margin: 15px 0;
+}
+
+.status-card h3 {
+  color: #333;
+  margin-top: 0;
+}
+
+.status-update-text {
+  font-size: 12px;
+  color: #999;
+  margin-top: 10px;
+}
+
+/* 10. Grupos de Botões */
+.button-group {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  max-width: 150px;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.btn-admin {
+  background-color: #ff9800;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  max-width: 300px;
+}
+
+.btn-success {
+  background-color: #28a745;
+}
+
+/* 11. Forms */
+.form-action {
+  margin-top: 20px;
+}
+
+.form-action-secondary {
+  margin-top: 15px;
+}
+
+/* 12. Tabela do Atendente */
+.table-container {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+  max-width: 900px;
+}
+
+.table-container h2 {
+  color: #333;
+  margin-top: 0;
+}
+
+.table-fila-info {
+  color: #666;
+  margin-bottom: 15px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th {
+  background-color: #20b2aa;
+  color: white;
+  padding: 15px;
+  text-align: left;
+  font-weight: bold;
+}
+
+.th-numero {
+  width: 50px;
+}
+
+.th-status {
+  width: 150px;
+}
+
+.th-acoes {
+  width: 220px;
+}
+
+td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+tr:hover {
+  background-color: #f5f5f5;
+}
+
+.status-badge {
+  padding: 8px 12px;
+  border-radius: 15px;
+  font-size: 12px;
+  font-weight: bold;
+  display: inline-block;
+}
+
+.status-aguardando {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.status-em-atendimento {
+  background-color: #cfe2ff;
+  color: #084298;
+}
+
+.status-atendido {
+  background-color: #d1e7dd;
+  color: #0f5132;
+}
+
+.btn-action {
+  padding: 8px 12px;
+  margin: 3px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.btn-atender {
+  background-color: #0dcaf0;
+  color: white;
+}
+
+.btn-atender:hover {
+  background-color: #0ba5c0;
+}
+
+.btn-pronto {
+  background-color: #28a745;
+  color: white;
+}
+
+.btn-pronto:hover {
+  background-color: #218838;
+}
+
+.btn-remover {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btn-remover:hover {
+  background-color: #c82333;
+}
+
+.posicao {
+  font-weight: bold;
+  color: #20b2aa;
+}
+
+.back-link {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.back-link a {
+  color: #20b2aa;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.back-link a:hover {
+  text-decoration: underline;
+}
