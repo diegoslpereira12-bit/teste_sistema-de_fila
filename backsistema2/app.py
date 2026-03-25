@@ -47,7 +47,7 @@ class BancoFila:
         with self.conectar() as conexao:
             return conexao.execute(sql, (cpf, senha)).fetchone()
 
-    def listar_fila(self):
+    def listar(self):
         sql = "SELECT * FROM usuarios WHERE status != 'Fora da fila' AND tipo = 'paciente' ORDER BY id ASC"
         with self.conectar() as conexao:
             return conexao.execute(sql).fetchall()
@@ -58,12 +58,12 @@ class BancoFila:
             conexao.execute(sql, (novo_status, id))
             conexao.commit()
 
-    def buscar_usuario_por_id(self, id):
+    def buscar_por_id(self, id):
         sql = "SELECT * FROM usuarios WHERE id = ?"
         with self.conectar() as conexao:
             return conexao.execute(sql, (id,)).fetchone()
 
-    def contar_fila(self):
+    def contar(self):
         sql = "SELECT COUNT(*) as total FROM usuarios WHERE status != 'Fora da fila' AND tipo = 'paciente'"
         with self.conectar() as conexao:
             resultado = conexao.execute(sql).fetchone()
@@ -79,19 +79,19 @@ def index():
     if usuario and usuario['cpf'] == '12345678910':
         e_admin = True
     
-    quantidade_fila = banco.contar_fila()
+    quantidade = banco.contar()
     
-    return render_template('mainpage.html', usuario_logado=usuario, e_admin=e_admin, fila_count=quantidade_fila)
+    return render_template('mainpage.html', usuario_logado=usuario, e_admin=e_admin, fila_count=quantidade)
 
 @app.route('/atendente')
 def painel_atendente():
     usuario = session.get('usuario')
     
     if not usuario or usuario['cpf'] != '12345678910':
-        flash("Acesso Negado! Apenas atendentes podem acessar.", "erro")
+        flash("Acesso Negado. Atendentes only podem acessar.", "erro")
         return redirect(url_for('index'))
 
-    fila = banco.listar_fila()
+    fila = banco.listar()
     
     return render_template('atendente.html', fila=fila)
 
@@ -107,7 +107,7 @@ def salvar_cadastro():
     senha = request.form.get('senha', '').strip()
 
     if not nome or not cpf or not email or not senha:
-        flash("Todos os campos são obrigatórios!", "erro")
+        flash("Todos os campos são obrigatórios", "erro")
         return redirect(url_for('pagina_cadastro'))
 
     if len(cpf) != 11 or not cpf.isdigit():
@@ -130,10 +130,10 @@ def salvar_cadastro():
                 'tipo': usuario['tipo'],
                 'status': usuario['status']
             }
-            flash(f"Cadastro realizado com sucesso! Bem-vindo, {nome}!", "sucesso")
+            flash(f"Cadastro feito com sucesso 😎. Bem-vindo, {nome}.", "sucesso")
             return redirect(url_for('index'))
     else:
-        flash("Erro: Esse CPF já está cadastrado.", "erro")
+        flash("Erro: CPF já está cadastrado.", "erro")
         return redirect(url_for('pagina_cadastro'))
 
 @app.route('/login')
@@ -146,7 +146,7 @@ def login_prosseguir():
     senha_digitada = request.form.get('senha', '').strip()
 
     if not cpf_digitado or not senha_digitada:
-        flash("CPF e Senha são obrigatórios!", "erro")
+        flash("CPF e Senha obrigatórios.", "erro")
         return redirect(url_for('pagina_login'))
 
     usuario = banco.login(cpf_digitado, senha_digitada)
@@ -159,10 +159,10 @@ def login_prosseguir():
             'tipo': usuario['tipo'],
             'status': usuario['status']
         }
-        flash(f"Bem-vindo, {usuario['nome']}!", "sucesso")
+        flash(f"Bem-vindo, {usuario['nome']}.", "sucesso")
         return redirect(url_for('index'))
     else:
-        flash("CPF ou Senha incorretos!", "erro")
+        flash("CPF ou Senha incorretos", "erro")
         return redirect(url_for('pagina_login'))
 
 @app.route('/entrar-na-fila', methods=['POST'])
@@ -174,7 +174,7 @@ def entrar_fila():
         return redirect(url_for('pagina_login'))
 
     if usuario['status'] != 'Fora da fila':
-        flash(f"Você já está na fila! Status: {usuario['status']}", "alerta")
+        flash(f"Você já tá na fila. Status: {usuario['status']}", "alerta")
         return redirect(url_for('index'))
 
     banco.alterar_status(usuario['id'], 'Aguardando atendimento')
@@ -182,7 +182,7 @@ def entrar_fila():
     session['usuario']['status'] = 'Aguardando atendimento'
     session.modified = True
     
-    flash("Você entrou na fila com sucesso!", "sucesso")
+    flash("Entrou na fila com sucesso.", "sucesso")
     return redirect(url_for('index'))
 
 @app.route('/mudar_status/<int:paciente_id>/<novo_status>')
@@ -190,17 +190,17 @@ def mudar_status(paciente_id, novo_status):
     usuario = session.get('usuario')
 
     if not usuario or usuario['cpf'] != '000':
-        flash("Apenas atendentes podem fazer isso!", "erro")
+        flash("Atendentes only mo vei", "erro")
         return redirect(url_for('index'))
 
     status_validos = ['Aguardando atendimento', 'Em atendimento', 'Atendido', 'Fora da fila']
     if novo_status not in status_validos:
-        flash("Status inválido!", "erro")
+        flash("Status inválido", "erro")
         return redirect(url_for('painel_atendente'))
 
     banco.alterar_status(paciente_id, novo_status)
     
-    flash(f"Status atualizado com sucesso!", "sucesso")
+    flash(f"Status atualizado com sucesso.", "sucesso")
     return redirect(url_for('painel_atendente'))
 
 @app.route('/sair-da-fila', methods=['POST'])
@@ -221,7 +221,7 @@ def sair_fila():
 @app.route('/logout')
 def logout():
     session.pop('usuario', None)
-    flash("Você foi desconectado!", "sucesso")
+    flash("Desconectado", "sucesso")
     return redirect(url_for('index'))
 
 
