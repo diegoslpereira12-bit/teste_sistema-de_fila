@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='mainpage.css') }}">
+    <title>Sistema de Atendimento | Início</title>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="logo">
+            <h1>Sistema de Atendimento</h1>
+        </div>
+        <nav class="user-menu">
+            {% if usuario_logado %}
+                <span class="welcome-text">Olá, {{ usuario_logado.nome }}</span>
+        
+                {% if e_admin %}
+                    <a href="/atendente" class="btn-registro" style="background-color: #ff9800;">Painel Atendente</a>
+                {% endif %}
+
+                <a href="/logout" class="btn-logout">Sair</a>
+            {% else %}
+                <a href="/login">Login</a>
+                <a href="/cadastrar" class="btn-registro">Registrar</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <main class="content-container">
+        <section class="hero-section">
+            <h2>Bem-vindo ao Atendimento Digital</h2>
+            <p>Clique no botão abaixo para entrar na fila de espera.</p>
+            
+            {% if usuario_logado %}
+                <form action="/entrar-na-fila" method="POST">
+                    <button type="submit" class="btn-entrar-fila">Entrar na Fila agora</button>
+                </form>
+            {% else %}
+                <div class="alert-info">
+                    <p>Você precisa estar logado para entrar na fila.</p>
+                </div>
+            {% endif %}
+        </section>
+
+        <div class="status-card">
+            <h3>Status da Fila</h3>
+            <p>Pessoas aguardando: <strong>{{ quantidade }}</strong></p>
+        </div>
+    </main>
+
+</body>
+</html>

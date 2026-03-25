@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='cadastro.css') }}">
+    <title>Cadastro | Sistema de Atendimento</title>
+</head>
+<body>
+    <main class="profile-container"> <section class="branco">
+            <h2 style="text-align: center; margin-bottom: 20px;">Criar Conta</h2>
+            
+            <form action="/salvar_cadastro" method="POST">
+                <div class="form-container">
+                    <input type="text" name="nome" placeholder="Nome Completo" required>
+                </div>
+
+                <div class="form-container">
+                    <input type="text" name="cpf" placeholder="CPF (apenas números)" maxlength="11" required>
+                </div>
+
+                <div class="form-container">
+                    <input type="email" name="email" placeholder="E-mail" required>
+                </div>
+
+                <div class="form-container">
+                    <input type="password" name="senha" placeholder="Crie uma senha" required>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn-save">Finalizar Cadastro</button>
+                </div>
+                
+                <p style="text-align: center; margin-top: 15px;">
+                    Já tem conta? <a href="/login">Faça Login</a>
+                </p>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

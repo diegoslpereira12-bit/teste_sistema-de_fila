@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='cadastro.css') }}">
+    <title>Login | Sistema de Atendimento</title>
+</head>
+<body>
+    <main class="profile-container"> <section class="branco">
+            <h2 style="text-align: center; margin-bottom: 25px;">Acessar Conta</h2>
+            
+            <form action="/login_prosseguir" method="POST">
+                <div class="form-container">
+                    <input type="text" name="cpf" placeholder="Seu CPF" maxlength="11" required>
+                </div>
+
+                <div class="form-container">
+                    <input type="password" name="senha" placeholder="Sua Senha" required>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn-save">Entrar</button>
+                </div>
+                
+                <p style="text-align: center; margin-top: 15px; font-size: 14px;">
+                    Ainda não tem conta? <a href="/cadastrar" style="color: #20b2aa; text-decoration: none;">Cadastre-se aqui</a>
+                </p>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

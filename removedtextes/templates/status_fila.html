@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='cadastro.css') }}">
+    <title>Status da Fila</title>
+</head>
+<body>
+    <main class="profile-container">
+        <section class="branco" style="text-align: center; padding: 40px;">
+            
+            {% set status_atual = "" %}
+            {% set posicao = 0 %}
+            
+            {# Busca o status e a posição do usuário logado na lista #}
+            {% for p in fila %}
+                {% if p.cpf == usuario_logado.cpf %}
+                    {% set status_atual = p.status %}
+                    {% set posicao = loop.index %}
+                {% endif %}
+            {% endfor %}
+
+            {% if status_atual == "Em análise" %}
+                <div class="loader"></div> <h2 style="color: #f39c12;">Estamos analisando uma posição para você...</h2>
+                <p>Aguarde enquanto o atendente valida seu cadastro.</p>
+
+            {% elif status_atual == "Aguardando atendimento" %}
+                <h2 style="color: #20b2aa;">Aceito!</h2>
+                <div style="margin: 20px 0; background: #f0fdfa; padding: 20px; border-radius: 15px;">
+                    <p style="font-size: 18px;">Sua posição atual na fila é:</p>
+                    <h1 style="font-size: 60px; color: #20b2aa;">{{ posicao }}º</h1>
+                </div>
+                <p>Por favor, permaneça nesta página ou aguarde ser chamado.</p>
+
+            {% else %}
+                <h2>Você não está na fila.</h2>
+                <a href="/" class="btn-save">Voltar ao Início</a>
+            {% endif %}
+
+            <br>
+            <a href="/" style="color: #666; text-decoration: none; font-size: 14px;">Atualizar Status</a>
+        </section>
+    </main>
+</body>
+</html>

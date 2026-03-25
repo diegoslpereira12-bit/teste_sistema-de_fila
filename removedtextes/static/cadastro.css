@@ -1,0 +1,82 @@
+/* 1. Configurações Gerais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #74ebd5 0%, #9face6 100%); /* Um gradiente suave */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* 2. O Card de Cadastro */
+.profile-container {
+    background-color: #ffffff;
+    width: 90%;
+    max-width: 400px; /* Largura ideal para formulários */
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+h2 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+
+/* 3. Inputs (Seguindo o seu padrão arredondado) */
+.form-container {
+    margin-bottom: 15px;
+}
+
+.form-container input {
+    width: 100%;
+    padding: 12px 20px;
+    border: 1px solid #ddd;
+    border-radius: 25px; /* Deixa o input bem arredondado */
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.form-container input:focus {
+    border-color: #74ebd5; /* Cor de destaque ao clicar */
+}
+
+/* 4. Botão de Ação */
+.btn-save {
+    width: 100%;
+    padding: 12px;
+    background-color: #20b2aa; /* O turquesa que você usou nos botões */
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.btn-save:hover {
+    background-color: #1a948e;
+}
+
+/* 5. Link de Rodapé */
+.footer-link {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    color: #666;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.footer-link:hover {
+    text-decoration: underline;
+}

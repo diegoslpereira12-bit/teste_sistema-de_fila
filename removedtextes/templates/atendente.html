@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='cadastro.css') }}">
+    <title>Painel do Atendente</title>
+    <style>
+        /* Estilos específicos para a tabela dentro do seu container */
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 12px; border-bottom: 1px solid #ddd; text-align: left; }
+        .status-badge { padding: 5px 10px; border-radius: 15px; font-size: 12px; font-weight: bold; }
+        .status-aguardando { background: #ffeaa7; color: #d35400; }
+        .status-atendimento { background: #55efc4; color: #00b894; }
+        .btn-acao { text-decoration: none; font-size: 12px; color: #0984e3; margin-right: 5px; }
+    </style>
+</head>
+<body>
+    <main class="profile-container" style="max-width: 800px;"> <section class="branco">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <h2>Fila de Chamadas</h2>
+                <a href="/" style="font-size: 14px; color: #666;">Voltar</a>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Paciente</th>
+                        <th>CPF</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for paciente in fila %}
+                    <tr>
+                        <td>{{ paciente.nome }}</td>
+                        <td>{{ paciente.cpf }}</td>
+                        <td>
+                            <span class="status-badge {% if paciente.status == 'Aguardando atendimento' %}status-aguardando{% else %}status-atendimento{% endif %}">
+                                {{ paciente.status }}
+                            </span>
+                        </td>
+                        <td>
+                            <a href="/mudar_status/{{ loop.index0 }}/Em Atendimento" class="btn-acao">Atender</a>
+                            <a href="/mudar_status/{{ loop.index0 }}/Atendimento finalizado" class="btn-acao" style="color: #d63031;">Finalizar</a>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="4" style="text-align: center; padding: 30px; color: #999;">Nenhum paciente na fila no momento.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+    </main>
+</body>
+</html>
